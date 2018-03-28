@@ -1,0 +1,17 @@
+.fa-vertical-line:after {
+	content: "\007C";
+  font-weight: bold;
+  display: block;
+  -o-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.btn{
+	height: 50px;
+	width: 50px;
+	border: 1px black solid;
+	text-align: center;
+	svg{
+		margin: auto !important;
+	}
+}

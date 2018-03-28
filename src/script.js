@@ -10,6 +10,10 @@ let kPixelHeight = 1 + (kBoardHeight * kPieceHeight);
 
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
+
+let isEraser = false;
+let isPencil = false;
+let selected =
 /* SET CANVAS SIZE */
 canvas.width = kPixelWidth;
 canvas.height = kPixelHeight;
