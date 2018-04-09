@@ -1,17 +1,24 @@
-.fa-vertical-line:after {
-  content: "\007C";
-  font-weight: bold;
-  display: block;
-  -o-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg); }
+body,
+html {
+  margin: 0; }
 
-.btn {
-  height: 50px;
-  width: 50px;
-  border: 1px black solid;
-  text-align: center; }
-  .btn svg {
-    margin: auto !important; }
+canvas {
+  display: block;
+  margin: auto;
+  padding-top: 40px; }
+
+.toolbars {
+  position: fixed; }
+  .toolbars .btn {
+    height: 50px;
+    width: 50px;
+    border: 1px #585858 solid;
+    background-color: #222222;
+    color: white;
+    text-align: center; }
+    .toolbars .btn img {
+      height: 25px;
+      width: 25px;
+      margin: 25%; }
 
 /*# sourceMappingURL=style.css.map */
