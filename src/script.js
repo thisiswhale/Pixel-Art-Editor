@@ -11,66 +11,16 @@ let kPixelHeight = 1 + (kBoardHeight * kPieceHeight);
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
-let isEraser = false;
-let isPencil = false;
-let isLine = false;
-let isDropper = false;
-
-let buttons = document.getElementsByClassName('btn');
-
-for (let btn of buttons){
-  btn.addEventListener('click', selectBtn, false)
-}
-
-let btnToggles = document.getElementsByClassName("btn-toggle")
-
-function selectBtn(){
-  for (let btn of btnToggles){
-    btn.classList.remove('toggle');
-  }
-
-  this.classList.add('toggle');
-  let toggleTool = this.getAttribute('id');
-
-  switch(toggleTool){
-
-    case 'draw':
-      isEraser = false;
-      isPencil = true;
-      isLine = false;
-      isDropper = false;
-      break;
-    case 'line':
-      isEraser = false;
-      isPencil = false;
-      isLine = true;
-      isDropper = false;
-      break;
-    case 'dropper':
-      isEraser = false;
-      isPencil = false;
-      isLine = false;
-      isDropper = true;
-      break;
-    case 'eraser':
-      isEraser = true;
-      isPencil = false;
-      isLine = false;
-      isDropper = false;
-      break;
-  }
-}
-
 /* SET CANVAS SIZE */
 canvas.width = kPixelWidth;
 canvas.height = kPixelHeight;
 
-canvas.addEventListener('click', fillCell, false);
+canvas.addEventListener('click', selectCell, false);
 let selectedColor ="#000";
 drawGrid();
 
 //2D ARRAY
-let dataGrid = new Array(kBoardWidth).fill(Array(kBoardHeight).fill(false))
+let dataGrid = new Array(kBoardWidth).fill(Array(kBoardHeight).fill(false));
 
 function Cell(row, column) {
     this.row = row;
@@ -117,23 +67,63 @@ function getCursorPosition(e) {
 	return cell;
 }
 //******************Drawing the Cell********************************************
-function fillCell(e) {
+function selectCell(e) {
 	//if(!isDrawing) return;
 
 	let cell = getCursorPosition(e);
 	let column = cell.column;
 	let row = cell.row;
 
-  //SAVES COLOR TO ARRAY at (row,column)
-  dataGrid[row][column] = selectedColor;
-
 	let x = (column * kPieceWidth);
 	let y = (row * kPieceHeight);
 	ctx.beginPath();
 	ctx.fillRect(x, y, kPieceWidth, kPieceHeight);
 	ctx.closePath();
+
+
+  switch (currentTool){
+    case 'draw':
+
+      break;
+    // case 'line':
+    //   break;
+    case 'eraser':
+      break;
+    // case 'fill'
+    //   break;
+  }
+  //SAVES COLOR TO ARRAY at (row,column)
+  dataGrid[row][column] = selectedColor;
 	ctx.strokeStyle = selectedColor;
+
 	ctx.stroke();
 
 	drawGrid();
+}
+
+let currentTool = '';
+
+let btnTools = document.getElementsByClassName("btn-toggle");
+
+let clearCanvas = document.getElementById('clear');
+clearCanvas.addEventListener('click', newCanvas, false);
+
+for (let btn of btnTools){
+  btn.addEventListener('click', selectTool, false)
+}
+
+function newCanvas(){
+ dataGrid = new Array(kBoardWidth).fill(Array(kBoardHeight).fill(false));
+ ctx.clearRect(0, 0, canvas.width, canvas.height);
+ drawGrid();
+}
+
+function selectTool(){
+  for (let btn of btnTools){
+    btn.classList.remove('toggle');
+  }
+
+  this.classList.add('toggle');
+  let toggleTool = this.getAttribute('id');
+  currentTool = toggleTool;
 }
