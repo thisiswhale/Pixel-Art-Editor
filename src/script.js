@@ -76,27 +76,25 @@ function selectCell(e) {
 
 	let x = (column * kPieceWidth);
 	let y = (row * kPieceHeight);
-	ctx.beginPath();
-	ctx.fillRect(x, y, kPieceWidth, kPieceHeight);
-	ctx.closePath();
-
 
   switch (currentTool){
     case 'draw':
-
+      ctx.beginPath();
+      ctx.fillRect(x, y, kPieceWidth, kPieceHeight);
+      ctx.closePath();
+      dataGrid[row][column] = selectedColor;
+    	ctx.strokeStyle = selectedColor;
+    	ctx.stroke();
       break;
     // case 'line':
     //   break;
     case 'eraser':
+      dataGrid[row][column] = selectedColor;
+      ctx.clearRect(x, y, kPieceHeight, kPieceHeight);
       break;
     // case 'fill'
     //   break;
   }
-  //SAVES COLOR TO ARRAY at (row,column)
-  dataGrid[row][column] = selectedColor;
-	ctx.strokeStyle = selectedColor;
-
-	ctx.stroke();
 
 	drawGrid();
 }
