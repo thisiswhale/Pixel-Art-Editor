@@ -13,12 +13,59 @@ let ctx = canvas.getContext("2d");
 
 let isEraser = false;
 let isPencil = false;
-let selected =
+let isLine = false;
+let isDropper = false;
+
+let buttons = document.getElementsByClassName('btn');
+
+for (let btn of buttons){
+  btn.addEventListener('click', selectBtn, false)
+}
+
+let btnToggles = document.getElementsByClassName("btn-toggle")
+
+function selectBtn(){
+  for (let btn of btnToggles){
+    btn.classList.remove('toggle');
+  }
+
+  this.classList.add('toggle');
+  let toggleTool = this.getAttribute('id');
+
+  switch(toggleTool){
+
+    case 'draw':
+      isEraser = false;
+      isPencil = true;
+      isLine = false;
+      isDropper = false;
+      break;
+    case 'line':
+      isEraser = false;
+      isPencil = false;
+      isLine = true;
+      isDropper = false;
+      break;
+    case 'dropper':
+      isEraser = false;
+      isPencil = false;
+      isLine = false;
+      isDropper = true;
+      break;
+    case 'eraser':
+      isEraser = true;
+      isPencil = false;
+      isLine = false;
+      isDropper = false;
+      break;
+  }
+}
+
 /* SET CANVAS SIZE */
 canvas.width = kPixelWidth;
 canvas.height = kPixelHeight;
 
-canvas.addEventListener('click', fillCell ,false);
+canvas.addEventListener('click', fillCell, false);
 let selectedColor ="#000";
 drawGrid();
 
@@ -30,6 +77,7 @@ function Cell(row, column) {
     this.column = column;
 }
 
+//******************Draws out Grid**********************************************
 function drawGrid() {
   ctx.beginPath();
 
@@ -49,7 +97,7 @@ function drawGrid() {
 	ctx.lineWidth = 2;
 	ctx.stroke();
 }
-
+//******************Finds Cursor Position***************************************
 function getCursorPosition(e) {
 	/* returns Cell with .row and .column properties */
 	let x;
@@ -68,7 +116,7 @@ function getCursorPosition(e) {
 	let cell = new Cell(Math.floor(y / kPieceHeight), Math.floor(x / kPieceWidth));
 	return cell;
 }
-
+//******************Drawing the Cell********************************************
 function fillCell(e) {
 	//if(!isDrawing) return;
 

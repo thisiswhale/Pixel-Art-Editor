@@ -14,11 +14,15 @@ canvas {
     width: 50px;
     border: 1px #585858 solid;
     background-color: #222222;
-    color: white;
+    opacity: 0.8;
     text-align: center; }
     .toolbars .btn img {
       height: 25px;
       width: 25px;
       margin: 25%; }
+  .toolbars .btn:hover {
+    opacity: 1; }
+  .toolbars .toggle {
+    opacity: 1; }
 
 /*# sourceMappingURL=style.css.map */
