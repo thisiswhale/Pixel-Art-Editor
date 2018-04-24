@@ -66,6 +66,7 @@ function getCursorPosition(e) {
 	let cell = new Cell(Math.floor(y / kPieceHeight), Math.floor(x / kPieceWidth));
 	return cell;
 }
+console.log(hello)
 //******************Drawing the Cell********************************************
 function selectCell(e) {
 	//if(!isDrawing) return;
